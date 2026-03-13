@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fleet Safety & GPS Solutions — Buyer's Guide | Traxxis GPS</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0F2B4C;
+    --navy-mid: #163A63;
+    --navy-light: #1E4D7B;
+    --teal: #00AEEF;
+    --teal-dark: #0090C9;
+    --teal-glow: rgba(0,174,239,0.10);
+    --teal-glow2: rgba(0,174,239,0.06);
+    --orange: #F7941D;
+    --orange-light: #FFAB40;
+    --orange-glow: rgba(247,148,29,0.10);
+    --white: #FFFFFF;
+    --cream: #F8FAFB;
+    --gray-50: #F1F4F6;
+    --gray-100: #E4E9ED;
+    --gray-200: #CED5DC;
+    --gray-400: #8D99A7;
+    --gray-600: #5A6877;
+    --gray-800: #2C3E50;
+    --success: #27AE60;
+    --red-soft: #E74C3C;
+    --font-head: 'Outfit', -apple-system, sans-serif;
+    --font-body: 'Inter', -apple-system, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); color: var(--gray-800); background: var(--cream); line-height: 1.72; -webkit-font-smoothing: antialiased; }
+
+  /* ─── HEADER BAR ─── */
+  .top-bar { background: var(--navy); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; }
+  .top-bar img { height: 34px; }
+  .top-bar-right { display: flex; gap: 20px; align-items: center; }
+  .top-bar a { color: rgba(255,255,255,0.7); font-size: 0.82rem; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+  .top-bar a:hover { color: var(--white); }
+  .top-bar .btn-demo { background: var(--orange); color: var(--white); padding: 8px 20px; border-radius: 6px; font-weight: 600; font-size: 0.82rem; transition: background 0.2s; }
+  .top-bar .btn-demo:hover { background: var(--orange-light); }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(155deg, var(--navy) 0%, var(--navy-mid) 50%, var(--navy-light) 100%);
+    color: var(--white); padding: 88px 32px 72px; text-align: center; position: relative; overflow: hidden;
+  }
+  .hero::before { content:''; position:absolute; top:-150px; right:-100px; width:600px; height:600px; background:radial-gradient(circle, rgba(0,174,239,0.08) 0%, transparent 70%); border-radius:50%; }
+  .hero::after { content:''; position:absolute; bottom:-100px; left:-60px; width:450px; height:450px; background:radial-gradient(circle, rgba(247,148,29,0.06) 0%, transparent 70%); border-radius:50%; }
+  .hero-badge { display:inline-block; background:rgba(0,174,239,0.15); border:1px solid rgba(0,174,239,0.3); color:var(--teal); font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:6px 20px; border-radius:30px; margin-bottom:28px; position:relative; }
+  .hero h1 { font-family:var(--font-head); font-size:clamp(2.2rem,5.5vw,3.6rem); font-weight:800; line-height:1.12; max-width:780px; margin:0 auto 20px; position:relative; }
+  .hero h1 span { color:var(--teal); }
+  .hero p { font-size:1.1rem; color:rgba(255,255,255,0.68); max-width:620px; margin:0 auto; line-height:1.75; position:relative; }
+
+  /* ─── STICKY NAV ─── */
+  .progress-nav { position:sticky; top:0; z-index:100; background:var(--white); border-bottom:1px solid var(--gray-100); padding:0 24px; box-shadow:0 2px 12px rgba(15,43,76,0.06); }
+  .progress-track { display:flex; max-width:1020px; margin:0 auto; overflow-x:auto; -ms-overflow-style:none; scrollbar-width:none; }
+  .progress-track::-webkit-scrollbar { display:none; }
+  .progress-step { flex:1; min-width:120px; text-align:center; padding:15px 10px; font-size:0.74rem; font-weight:600; color:var(--gray-400); text-decoration:none; position:relative; transition:color 0.3s; white-space:nowrap; cursor:pointer; font-family:var(--font-head); }
+  .progress-step::after { content:''; position:absolute; bottom:0; left:18%; right:18%; height:3px; background:transparent; border-radius:3px 3px 0 0; transition:background 0.3s; }
+  .progress-step:hover { color:var(--gray-600); }
+  .progress-step.active { color:var(--teal); }
+  .progress-step.active::after { background:var(--teal); }
+  .progress-step.completed { color:var(--success); }
+  .progress-step.completed::after { background:var(--success); }
+  .step-num { display:inline-flex; align-items:center; justify-content:center; width:21px; height:21px; border-radius:50%; background:var(--gray-100); color:var(--gray-600); font-size:0.65rem; font-weight:700; margin-right:5px; transition:all 0.3s; }
+  .progress-step.active .step-num { background:var(--teal); color:var(--white); }
+  .progress-step.completed .step-num { background:var(--success); color:var(--white); }
+
+  /* ─── MAIN ─── */
+  .main { max-width:880px; margin:0 auto; padding:0 24px 80px; }
+
+  /* ─── SECTION BLOCK ─── */
+  .step-section { margin:56px 0; opacity:0; transform:translateY(28px); transition:opacity 0.55s ease, transform 0.55s ease; }
+  .step-section.visible { opacity:1; transform:translateY(0); }
+
+  .step-header { display:flex; align-items:flex-start; gap:18px; margin-bottom:24px; }
+  .step-icon { flex-shrink:0; width:50px; height:50px; background:linear-gradient(135deg, var(--teal), var(--teal-dark)); border-radius:13px; display:flex; align-items:center; justify-content:center; color:var(--white); font-family:var(--font-head); font-size:1.3rem; font-weight:800; box-shadow:0 4px 14px rgba(0,174,239,0.25); }
+  .step-label { font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:2px; font-family:var(--font-head); }
+  .step-title { font-family:var(--font-head); font-size:clamp(1.5rem,3vw,1.9rem); color:var(--navy); line-height:1.2; font-weight:700; }
+  .step-body { padding-left:68px; }
+  @media(max-width:640px) { .step-body { padding-left:0; } }
+  .step-body > p { color:var(--gray-600); font-size:0.98rem; margin-bottom:18px; }
+
+  /* ─── INFOGRAPHIC STAT PANELS ─── */
+  .infographic { display:grid; grid-template-columns:repeat(auto-fit, minmax(190px,1fr)); gap:16px; margin:28px 0; }
+  .info-stat { background:var(--white); border:1px solid var(--gray-100); border-radius:14px; padding:28px 22px; text-align:center; position:relative; overflow:hidden; transition:border-color 0.3s, transform 0.2s; }
+  .info-stat:hover { border-color:var(--teal); transform:translateY(-2px); }
+  .info-stat::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg, var(--teal), var(--teal-dark)); }
+  .info-stat .big-num { font-family:var(--font-head); font-size:2.6rem; font-weight:800; color:var(--navy); line-height:1; margin-bottom:4px; }
+  .info-stat .big-num span { color:var(--teal); }
+  .info-stat .stat-desc { font-size:0.82rem; font-weight:600; color:var(--gray-600); line-height:1.4; }
+  .info-stat .stat-source { font-size:0.68rem; color:var(--gray-400); margin-top:8px; }
+
+  /* ─── WIDE STAT BANNER ─── */
+  .stat-banner { background:linear-gradient(135deg, var(--navy), var(--navy-mid)); border-radius:16px; padding:36px 32px; margin:28px 0; display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:24px; text-align:center; color:var(--white); }
+  .stat-banner .sb-num { font-family:var(--font-head); font-size:2rem; font-weight:800; color:var(--teal); }
+  .stat-banner .sb-label { font-size:0.8rem; color:rgba(255,255,255,0.7); margin-top:4px; }
+
+  /* ─── CARDS ─── */
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:16px; margin:24px 0; }
+  .card { background:var(--white); border:1px solid var(--gray-100); border-radius:12px; padding:26px 22px; transition:border-color 0.3s, box-shadow 0.3s, transform 0.2s; }
+  .card:hover { border-color:var(--teal); box-shadow:0 6px 24px rgba(0,174,239,0.08); transform:translateY(-2px); }
+  .card-icon { font-size:1.5rem; margin-bottom:10px; }
+  .card h4 { font-family:var(--font-head); font-size:0.95rem; font-weight:700; color:var(--navy); margin-bottom:7px; }
+  .card p { font-size:0.86rem; color:var(--gray-600); line-height:1.6; margin-bottom:0; }
+
+  /* ─── SPLIT PANEL (side by side) ─── */
+  .split-panel { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:28px 0; }
+  @media(max-width:640px) { .split-panel { grid-template-columns:1fr; } }
+  .split-box { background:var(--white); border:1px solid var(--gray-100); border-radius:14px; padding:28px 24px; }
+  .split-box h4 { font-family:var(--font-head); font-size:1rem; font-weight:700; color:var(--navy); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+  .split-box ul { list-style:none; margin:0; padding:0; }
+  .split-box ul li { position:relative; padding-left:20px; margin-bottom:8px; font-size:0.9rem; color:var(--gray-600); line-height:1.5; }
+  .split-box ul li::before { content:'→'; position:absolute; left:0; color:var(--teal); font-weight:700; }
+
+  /* ─── ACCORDION ─── */
+  .accordion { margin:24px 0; }
+  .accordion-item { background:var(--white); border:1px solid var(--gray-100); border-radius:12px; margin-bottom:10px; overflow:hidden; transition:border-color 0.3s; }
+  .accordion-item.open { border-color:var(--teal); }
+  .accordion-trigger { width:100%; background:none; border:none; padding:18px 22px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; font-family:var(--font-head); font-size:0.92rem; font-weight:600; color:var(--navy); text-align:left; transition:color 0.2s; }
+  .accordion-trigger:hover { color:var(--teal); }
+  .accordion-arrow { width:20px; height:20px; transition:transform 0.3s; flex-shrink:0; margin-left:12px; }
+  .accordion-item.open .accordion-arrow { transform:rotate(180deg); }
+  .accordion-content { max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
+  .accordion-inner { padding:0 22px 22px; font-size:0.9rem; color:var(--gray-600); line-height:1.7; }
+  .accordion-inner ul { margin:10px 0 0 0; list-style:none; padding:0; }
+  .accordion-inner ul li { position:relative; padding-left:18px; margin-bottom:6px; }
+  .accordion-inner ul li::before { content:'→'; position:absolute; left:0; color:var(--teal); font-weight:700; }
+
+  /* ─── CALLOUT ─── */
+  .callout { background:var(--teal-glow); border-left:4px solid var(--teal); border-radius:0 12px 12px 0; padding:22px 26px; margin:24px 0; }
+  .callout.orange { background:var(--orange-glow); border-left-color:var(--orange); }
+  .callout-label { font-family:var(--font-head); font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:6px; }
+  .callout.orange .callout-label { color:var(--orange); }
+  .callout p { font-size:0.92rem; color:var(--gray-800); margin-bottom:0; line-height:1.65; }
+
+  /* ─── TABLE ─── */
+  .comp-table { width:100%; border-collapse:collapse; margin:24px 0; background:var(--white); border-radius:12px; overflow:hidden; border:1px solid var(--gray-100); font-size:0.88rem; }
+  .comp-table thead { background:var(--navy); color:var(--white); }
+  .comp-table th { padding:14px 18px; font-family:var(--font-head); font-weight:600; text-align:left; font-size:0.78rem; letter-spacing:0.04em; text-transform:uppercase; }
+  .comp-table td { padding:13px 18px; border-bottom:1px solid var(--gray-50); color:var(--gray-600); }
+  .comp-table tbody tr:last-child td { border-bottom:none; }
+  .comp-table tbody tr:hover { background:var(--gray-50); }
+  .comp-table .highlight { color:var(--teal); font-weight:600; }
+
+  /* ─── TIMELINE ─── */
+  .timeline { margin:28px 0; position:relative; padding-left:28px; }
+  .timeline::before { content:''; position:absolute; left:10px; top:8px; bottom:8px; width:2px; background:linear-gradient(180deg, var(--teal), var(--navy-light)); border-radius:2px; }
+  .tl-item { position:relative; margin-bottom:24px; }
+  .tl-item::before { content:''; position:absolute; left:-22px; top:6px; width:12px; height:12px; background:var(--teal); border-radius:50%; border:3px solid var(--cream); }
+  .tl-item h4 { font-family:var(--font-head); font-size:0.92rem; font-weight:700; color:var(--navy); margin-bottom:4px; }
+  .tl-item p { font-size:0.88rem; color:var(--gray-600); line-height:1.6; }
+
+  /* ─── CHECKLIST ─── */
+  .checklist { background:var(--white); border:1px solid var(--gray-100); border-radius:12px; padding:26px; margin:24px 0; }
+  .checklist h4 { font-family:var(--font-head); font-size:0.92rem; font-weight:700; color:var(--navy); margin-bottom:14px; }
+  .checklist-item { display:flex; align-items:flex-start; gap:11px; padding:9px 0; border-bottom:1px solid var(--gray-50); cursor:pointer; user-select:none; }
+  .checklist-item:last-child { border-bottom:none; }
+  .check-box { flex-shrink:0; width:21px; height:21px; border:2px solid var(--gray-200); border-radius:5px; display:flex; align-items:center; justify-content:center; transition:all 0.2s; margin-top:1px; }
+  .checklist-item.checked .check-box { background:var(--success); border-color:var(--success); }
+  .check-svg { opacity:0; transition:opacity 0.2s; }
+  .checklist-item.checked .check-svg { opacity:1; }
+  .checklist-item span { font-size:0.9rem; color:var(--gray-600); transition:color 0.2s; }
+  .checklist-item.checked span { color:var(--gray-400); text-decoration:line-through; }
+
+  /* ─── CTA BLOCK ─── */
+  .cta-block { background:linear-gradient(145deg, var(--navy), var(--navy-mid)); border-radius:16px; padding:52px 40px; text-align:center; color:var(--white); margin:60px 0 0; position:relative; overflow:hidden; }
+  .cta-block::before { content:''; position:absolute; top:-60px; right:-60px; width:280px; height:280px; background:radial-gradient(circle, rgba(0,174,239,0.1) 0%, transparent 70%); border-radius:50%; }
+  .cta-block h2 { font-family:var(--font-head); font-size:1.75rem; font-weight:700; margin-bottom:12px; position:relative; }
+  .cta-block p { color:rgba(255,255,255,0.65); max-width:500px; margin:0 auto 26px; font-size:1rem; position:relative; }
+  .cta-btn { display:inline-block; background:var(--orange); color:var(--white); padding:14px 34px; border-radius:8px; font-family:var(--font-head); font-weight:700; font-size:0.95rem; text-decoration:none; transition:background 0.2s, transform 0.2s; position:relative; }
+  .cta-btn:hover { background:var(--orange-light); transform:translateY(-1px); }
+  .cta-btn-secondary { display:inline-block; color:var(--teal); font-weight:600; font-size:0.9rem; text-decoration:none; margin-left:20px; position:relative; }
+  .cta-btn-secondary:hover { text-decoration:underline; }
+
+  /* ─── FOOTER ─── */
+  .footer { background:var(--navy); color:rgba(255,255,255,0.45); text-align:center; padding:28px 24px; font-size:0.78rem; }
+  .footer a { color:var(--teal); text-decoration:none; }
+
+  /* ─── RESPONSIVE ─── */
+  @media(max-width:640px) {
+    .hero { padding:68px 20px 52px; }
+    .top-bar { padding:12px 16px; }
+    .top-bar img { height:28px; }
+    .cta-block { padding:36px 20px; }
+    .infographic { grid-template-columns:1fr 1fr; }
+    .stat-banner { grid-template-columns:1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── TOP BAR ─── -->
+<div class="top-bar">
+  <img src="https://traxxisgps.com/wp-content/uploads/2022/05/cropped-Traxxis-refresh-logo_horizontal.png" alt="Traxxis GPS Solutions">
+  <div class="top-bar-right">
+    <a href="tel:+18884477059">888.447.7059</a>
+    <a href="https://traxxisgps.com/support/">Support</a>
+    <a href="https://calendly.com/d/5h8-5jj-6wm/intro-call-tracking-safety-solutions-from-traxxis-gps" class="btn-demo">Schedule a Demo</a>
+  </div>
+</div>
+
+<!-- ─── HERO ─── -->
+<header class="hero">
+  <div class="hero-badge">Your Partner in Fleet Intelligence</div>
+  <h1>Fleet Safety &amp; GPS Solutions <span>Buyer's Guide</span></h1>
+  <p>Everything you need to evaluate fleet technology, understand the proven benefits of dash cams and telematics, and roll out a program your entire organization will embrace.</p>
+</header>
+
+<!-- ─── STICKY PROGRESS ─── -->
+<nav class="progress-nav" id="progressNav">
+  <div class="progress-track">
+    <a class="progress-step active" href="#step1"><span class="step-num">1</span>Why Now</a>
+    <a class="progress-step" href="#step2"><span class="step-num">2</span>Camera Benefits</a>
+    <a class="progress-step" href="#step3"><span class="step-num">3</span>Traxxis Solutions</a>
+    <a class="progress-step" href="#step4"><span class="step-num">4</span>Office Adoption</a>
+    <a class="progress-step" href="#step5"><span class="step-num">5</span>Driver Adoption</a>
+    <a class="progress-step" href="#step6"><span class="step-num">6</span>ROI &amp; Next Steps</a>
+  </div>
+</nav>
+
+<!-- ─── MAIN ─── -->
+<main class="main">
+
+  <!-- ═══ STEP 1: WHY NOW ═══ -->
+  <section class="step-section" id="step1">
+    <div class="step-header">
+      <div class="step-icon">1</div>
+      <div><div class="step-label">Step 1 of 6</div><h2 class="step-title">Why Fleet Technology Matters Now More Than Ever</h2></div>
+    </div>
+    <div class="step-body">
+      <p>Fleet costs are climbing, regulations are tightening, and the war for qualified drivers has never been more competitive. The fleets that thrive in this environment aren't guessing — they're using connected technology to make smarter, faster, safer decisions every day.</p>
+
+      <div class="stat-banner">
+        <div><div class="sb-num">90%+</div><div class="sb-label">of road collisions involve human error</div></div>
+        <div><div class="sb-num">134K</div><div class="sb-label">truck/bus crashes in the U.S. in 2024</div></div>
+        <div><div class="sb-num">48%</div><div class="sb-label">rise in distracted driving violations (H1 2024)</div></div>
+        <div><div class="sb-num">60%</div><div class="sb-label">of fleet operating costs tied to fuel</div></div>
+      </div>
+
+      <p>These numbers tell a clear story: reactive safety programs aren't enough. The organizations investing in proactive fleet technology — GPS tracking, AI-powered dash cams, driver coaching, and ELD compliance — are seeing dramatic improvements across safety, cost, and performance metrics.</p>
+
+      <div class="callout">
+        <div class="callout-label">The Traxxis GPS Difference</div>
+        <p>With 20+ years in the industry, 500+ commercial clients nationwide, and 100+ years of combined management expertise, Traxxis GPS delivers the right-fit solutions — not one-size-fits-all bundles. We're your dedicated technology partner, not just another vendor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STEP 2: CAMERA BENEFITS ═══ -->
+  <section class="step-section" id="step2">
+    <div class="step-header">
+      <div class="step-icon">2</div>
+      <div><div class="step-label">Step 2 of 6</div><h2 class="step-title">The Proven Impact of Dash Cams &amp; Video Telematics</h2></div>
+    </div>
+    <div class="step-body">
+      <p>Dash cameras have evolved from simple recorders into AI-powered safety platforms that detect risk in real time, coach drivers in the moment, and provide indisputable evidence when you need it most. The data speaks for itself:</p>
+
+      <div class="infographic">
+        <div class="info-stat">
+          <div class="big-num">60<span>%</span></div>
+          <div class="stat-desc">Reduction in collision frequency within the first year of AI dash cam deployment</div>
+          <div class="stat-source">Industry fleet studies</div>
+        </div>
+        <div class="info-stat">
+          <div class="big-num">73<span>%</span></div>
+          <div class="stat-desc">Crash rate reduction over 30 months with dual-facing cams + coaching</div>
+          <div class="stat-source">2025 Fleet Safety Report</div>
+        </div>
+        <div class="info-stat">
+          <div class="big-num">86<span>%</span></div>
+          <div class="stat-desc">Reduction in vehicle collision costs with camera-based safety programs</div>
+          <div class="stat-source">Geotab fleet data</div>
+        </div>
+        <div class="info-stat">
+          <div class="big-num">85<span>%</span></div>
+          <div class="stat-desc">Of drivers self-correct after receiving real-time in-cab coaching alerts</div>
+          <div class="stat-source">Commercial Carrier Journal</div>
+        </div>
+      </div>
+
+      <h3 style="font-family:var(--font-head);color:var(--navy);font-size:1.15rem;margin:28px 0 16px;font-weight:700;">How Camera Technology Protects Your Business</h3>
+
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-trigger">Collision Prevention &amp; Real-Time Alerts<svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg></button>
+          <div class="accordion-content"><div class="accordion-inner">AI-powered dash cams don't just record — they actively prevent accidents. Forward collision warnings, lane departure alerts, and tailgating detection give drivers the chance to self-correct before a dangerous situation escalates. Studies show forward collision warning systems alone can reduce rear-end crashes by up to 44%.</div></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">Driver Exoneration &amp; Liability Protection<svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg></button>
+          <div class="accordion-content"><div class="accordion-inner">When an incident occurs, clear video evidence resolves disputes quickly and protects your drivers from false claims. Fleets using cameras report that the vast majority of collisions involving their drivers are caused by the other party — and they have the footage to prove it. This directly reduces legal exposure and prevents costly payouts.</div></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">Insurance Premium Savings<svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg></button>
+          <div class="accordion-content"><div class="accordion-inner">Many insurers now offer 5–15% premium discounts for fleets equipped with dash cam solutions, especially when paired with GPS tracking and active driver coaching programs. Beyond discounts, the reduction in claims frequency and severity leads to better claims history — lowering your rates year over year.</div></div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">Distracted Driving Detection<svg class="accordion-arrow" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/></svg></button>
+          <div class="accordion-content"><div class="accordion-inner">Distracted driving contributed to over 324,000 injuries and thousands of deaths in 2023 alone. AI-enabled cameras detect phone use, eating, drowsiness, and other distractions in real time — alerting drivers before those behaviors lead to incidents. One city fleet achieved an 81% reduction in collision risk and a 46% decrease in mobile phone use after deploying AI dash cams.</div></div>
+        </div>
+      </div>
+
+      <div class="callout orange">
+        <div class="callout-label">Industry Momentum</div>
+        <p>Dual-facing in-cab cameras are now the fastest-growing safety technology in trucking. Adoption jumped to 35% of fleets in 2025 — up from under 25% the prior three years — and it's the #1 technology fleets plan to add next.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STEP 3: TRAXXIS SOLUTIONS ═══ -->
+  <section class="step-section" id="step3">
+    <div class="step-header">
+      <div class="step-icon">3</div>
+      <div><div class="step-label">Step 3 of 6</div><h2 class="step-title">The Traxxis GPS Solution Ecosystem</h2></div>
+    </div>
+    <div class="step-body">
+      <p>Unlike vendors who push a single product, Traxxis GPS offers a modular ecosystem — you pick the solutions that match your goals, and they all work together seamlessly on one platform. Here's what's available:</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📍</div>
+          <h4>GPS Fleet Tracking (Geotab)</h4>
+          <p>Real-time vehicle location, geofencing, trip history, and advanced analytics powered by the world's #1 commercial telematics platform.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎥</div>
+          <h4>ZenCAM — AI Dash Cameras</h4>
+          <p>AI-enabled video telematics with in-cab coaching, live streaming, on-demand footage retrieval, and automated driving violation detection.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🛡️</div>
+          <h4>Driver Coaching &amp; Safety</h4>
+          <p>Driver scorecards, gamification, targeted training workflows, and the Safety Center — your command hub for proactive risk management.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📋</div>
+          <h4>ELD &amp; Compliance</h4>
+          <p>Manage HOS, DVIR, and IFTA on one system. Simplify compliance, reduce paperwork, and stay ahead of FMCSA regulations.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📦</div>
+          <h4>Asset Tracking</h4>
+          <p>Battery-powered, solar-powered, and Bluetooth tracking for trailers, containers, equipment, and high-value non-powered assets.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🗺️</div>
+          <h4>Route Optimization</h4>
+          <p>Reduce miles traveled, improve ETAs, and spend less time planning with intelligent routing software that puts efficiency on autopilot.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">Why Traxxis GPS?</div>
+        <p>Every customer is treated as our most important client. We offer cutting-edge technology with flexible programs — no never-ending bundled contracts. From consultation through training, implementation, and ongoing support, we're with you every step.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STEP 4: OFFICE ADOPTION ═══ -->
+  <section class="step-section" id="step4">
+    <div class="step-header">
+      <div class="step-icon">4</div>
+      <div><div class="step-label">Step 4 of 6</div><h2 class="step-title">Rolling It Out — The Office &amp; Management Perspective</h2></div>
+    </div>
+    <div class="step-body">
+      <p>Great technology fails without great adoption. Getting your office team — from executives to dispatchers to safety managers — aligned and invested early is the single biggest predictor of a successful rollout.</p>
+
+      <h3 style="font-family:var(--font-head);color:var(--navy);font-size:1.1rem;margin:24px 0 14px;font-weight:700;">Your Internal Adoption Roadmap</h3>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <h4>Phase 1 — Build the Business Case (Week 1–2)</h4>
+          <p>Quantify your current costs: collision expenses, fuel waste, compliance fines, insurance premiums. Present the data to leadership alongside projected ROI from Traxxis GPS. We'll help you build the case with real benchmarks from fleets like yours.</p>
+        </div>
+        <div class="tl-item">
+          <h4>Phase 2 — Assemble Your Champion Team (Week 2–3)</h4>
+          <p>Identify key stakeholders: Fleet/Safety Manager, IT lead, Finance, Operations, and a driver representative. Assign a project champion who owns the rollout internally. Traxxis provides a dedicated account manager to partner with your champion.</p>
+        </div>
+        <div class="tl-item">
+          <h4>Phase 3 — Configure &amp; Train (Week 3–5)</h4>
+          <p>Traxxis handles account setup, vehicle labeling, and system verification. We then schedule team training — online sessions that cover the platform, dashboards, reporting, and daily workflows for each role.</p>
+        </div>
+        <div class="tl-item">
+          <h4>Phase 4 — Pilot &amp; Refine (Week 5–8)</h4>
+          <p>Start with a subset of vehicles. Gather feedback from managers and drivers. Adjust alert thresholds, coaching workflows, and reporting preferences before expanding fleet-wide.</p>
+        </div>
+        <div class="tl-item">
+          <h4>Phase 5 — Full Deployment &amp; Ongoing Support (Week 8+)</h4>
+          <p>Scale to the full fleet with confidence. Your Traxxis support team is always a call away — and we proactively check in to ensure you're getting maximum value.</p>
+        </div>
+      </div>
+
+      <div class="split-panel">
+        <div class="split-box">
+          <h4>🏢 Getting Executive Buy-In</h4>
+          <ul>
+            <li>Lead with dollars — quantify collision and fuel costs</li>
+            <li>Show conservative ROI over 12–18 months</li>
+            <li>Highlight competitive risk of inaction</li>
+            <li>Reference Traxxis case studies from similar industries</li>
+            <li>Position as a retention tool — drivers want modern fleets</li>
+          </ul>
+        </div>
+        <div class="split-box">
+          <h4>⚙️ Getting IT &amp; Operations Aligned</h4>
+          <ul>
+            <li>Traxxis integrates with your existing TMS, ERP, and dispatch</li>
+            <li>Open API and SDK for custom integrations</li>
+            <li>Cloud-based — no heavy on-premise infrastructure</li>
+            <li>SOC 2 compliant data security standards</li>
+            <li>Professional installation network nationwide</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STEP 5: DRIVER ADOPTION ═══ -->
+  <section class="step-section" id="step5">
+    <div class="step-header">
+      <div class="step-icon">5</div>
+      <div><div class="step-label">Step 5 of 6</div><h2 class="step-title">Winning Over Your Drivers</h2></div>
+    </div>
+    <div class="step-body">
+      <p>Driver adoption is where many fleet technology programs stall. The key is framing the technology as something that <em>protects and supports</em> drivers — not something that spies on them. Here's how to get it right.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">💬</div>
+          <h4>Communicate Early &amp; Honestly</h4>
+          <p>Tell drivers what's coming, why, and how it benefits <em>them</em> before install day. Surprises breed distrust — transparency builds buy-in.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🛡️</div>
+          <h4>Lead with Protection</h4>
+          <p>Cameras exonerate drivers from false claims — that's the headline. When a car cuts off your driver, the footage proves they weren't at fault.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🏆</div>
+          <h4>Recognize, Don't Punish</h4>
+          <p>Use scorecards and gamification to celebrate safe drivers. Recognition programs drive engagement far more effectively than punitive approaches.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔒</div>
+          <h4>Address Privacy Head-On</h4>
+          <p>Explain exactly when cameras record, who can view footage, and what privacy protections are in place. Clear policies eliminate the "Big Brother" concern.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">What Drivers Actually Say</div>
+        <p>Fleets consistently report that once cameras are installed, the majority of drivers become supporters — especially after the first time footage exonerates them from a false claim or identifies an unsafe situation caused by another motorist.</p>
+      </div>
+
+      <h3 style="font-family:var(--font-head);color:var(--navy);font-size:1.1rem;margin:24px 0 14px;font-weight:700;">Driver Communication Checklist</h3>
+      <div class="checklist">
+        <h4>Complete before your rollout launch</h4>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="check-box"><svg class="check-svg" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span>Hold a team meeting to introduce the program and explain the "why" (safety + protection)</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="check-box"><svg class="check-svg" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span>Distribute a one-page FAQ addressing common concerns (privacy, footage access, consequences)</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="check-box"><svg class="check-svg" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span>Share real exoneration stories — nothing builds trust like proof the camera helped a driver</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="check-box"><svg class="check-svg" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span>Announce the recognition/rewards program — make safe driving visible and celebrated</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="check-box"><svg class="check-svg" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span>Provide a clear escalation path — drivers should know who to talk to with concerns</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="check-box"><svg class="check-svg" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span>Walk drivers through the app — show them self-coaching features and their own scorecard</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STEP 6: ROI & NEXT STEPS ═══ -->
+  <section class="step-section" id="step6">
+    <div class="step-header">
+      <div class="step-icon">6</div>
+      <div><div class="step-label">Step 6 of 6</div><h2 class="step-title">The Business Case &amp; Your Next Steps</h2></div>
+    </div>
+    <div class="step-body">
+      <p>Fleet technology is an investment — and the returns are well-documented. Here's what Traxxis GPS clients and the broader industry consistently experience:</p>
+
+      <div class="infographic">
+        <div class="info-stat">
+          <div class="big-num">20–30<span>%</span></div>
+          <div class="stat-desc">Reduction in collisions and related claims</div>
+        </div>
+        <div class="info-stat">
+          <div class="big-num">10–15<span>%</span></div>
+          <div class="stat-desc">Savings on fleet fuel costs</div>
+        </div>
+        <div class="info-stat">
+          <div class="big-num">5–15<span>%</span></div>
+          <div class="stat-desc">Insurance premium reduction</div>
+        </div>
+        <div class="info-stat">
+          <div class="big-num">50<span>%+</span></div>
+          <div class="stat-desc">Decrease in safety-related events with coaching</div>
+        </div>
+      </div>
+
+      <div class="callout orange">
+        <div class="callout-label">From Traxxis GPS Clients</div>
+        <p>"We invested in Traxxis GPS for our business, and after one month we saved over $3,000 in gasoline alone." — "Since installing the system, we've cut our fuel costs by more than 50%." — These are real results from real Traxxis GPS customers.</p>
+      </div>
+
+      <h3 style="font-family:var(--font-head);color:var(--navy);font-size:1.1rem;margin:24px 0 14px;font-weight:700;">Getting Started with Traxxis GPS</h3>
+
+      <table class="comp-table">
+        <thead><tr><th>Step</th><th>What Happens</th><th>Who's Involved</th></tr></thead>
+        <tbody>
+          <tr><td class="highlight">1. Discovery Call</td><td>We learn about your fleet, goals, and challenges — no pressure, just conversation.</td><td>Your team + Traxxis consultant</td></tr>
+          <tr><td class="highlight">2. Custom Proposal</td><td>A tailored recommendation with the right-fit solutions, pricing, and projected ROI.</td><td>Traxxis account manager</td></tr>
+          <tr><td class="highlight">3. Agreement &amp; Setup</td><td>Simple onboarding — equipment ships in 5–7 business days after approval.</td><td>Traxxis support + your IT lead</td></tr>
+          <tr><td class="highlight">4. Installation</td><td>Professional installation nationwide. Allow ~45–60 minutes per vehicle.</td><td>Traxxis certified installers</td></tr>
+          <tr><td class="highlight">5. Training &amp; Launch</td><td>Live training for your team, system verification, and go-live support.</td><td>Traxxis training specialist + your team</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <div class="cta-block">
+    <h2>Your Success Is Our Success</h2>
+    <p>Ready to see how Traxxis GPS can transform your fleet's safety, efficiency, and bottom line? Let's start the conversation.</p>
+    <a href="https://calendly.com/d/5h8-5jj-6wm/intro-call-tracking-safety-solutions-from-traxxis-gps" class="cta-btn">Schedule a Demo</a>
+    <a href="tel:+18884477059" class="cta-btn-secondary">or call 888.447.7059</a>
+  </div>
+
+</main>
+
+<footer class="footer">
+  &copy; 2026 Traxxis GPS Solutions, Inc. All rights reserved. &nbsp;|&nbsp; Rock Hill, SC &nbsp;|&nbsp; <a href="https://traxxisgps.com">traxxisgps.com</a> &nbsp;|&nbsp; 888.447.7059<br>
+  <span style="font-size:0.72rem;opacity:0.7;">Industry statistics cited from published fleet safety research. Individual results may vary based on fleet size, operations, and program adoption.</span>
+</footer>
+
+<script>
+  // Accordion
+  document.querySelectorAll('.accordion-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.accordion-item');
+      const content = item.querySelector('.accordion-content');
+      const isOpen = item.classList.contains('open');
+      item.closest('.accordion').querySelectorAll('.accordion-item.open').forEach(i => {
+        if(i !== item) { i.classList.remove('open'); i.querySelector('.accordion-content').style.maxHeight = '0'; }
+      });
+      if(isOpen) { item.classList.remove('open'); content.style.maxHeight = '0'; }
+      else { item.classList.add('open'); content.style.maxHeight = content.scrollHeight + 'px'; }
+    });
+  });
+  // Checklist
+  function toggleCheck(el) { el.classList.toggle('checked'); }
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+  document.querySelectorAll('.step-section').forEach(s => observer.observe(s));
+  // Active progress
+  const sections = document.querySelectorAll('.step-section');
+  const navLinks = document.querySelectorAll('.progress-step');
+  const po = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        const idx = Array.from(sections).findIndex(s => s.id === entry.target.id);
+        navLinks.forEach((link, i) => { link.classList.remove('active','completed'); if(i < idx) link.classList.add('completed'); if(i === idx) link.classList.add('active'); });
+      }
+    });
+  }, { threshold: 0.25 });
+  sections.forEach(s => po.observe(s));
+</script>
+</body>
+</html>
