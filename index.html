@@ -487,7 +487,7 @@
     <div><div class="step-label">Step 6 of 6</div><h2 class="step-title">Configure Your System</h2></div>
   </div>
   <div class="step-body">
-    <p>Now it's time to set up your account and customize your camera configuration. Click the button below to open the configuration tool. You'll set up your account contacts, choose your camera channels, select safety rules with our recommended settings, and generate a completed configuration sheet.</p>
+    <p>Now it's time to set up your account and customize your dash camera configuration. Click the button below to open the configuration tool. You'll set up your account contacts, choose your camera channels, select safety rules with our recommended settings, and generate a completed configuration approval sheet.</p>
     <div class="config-launcher">
       <button class="config-btn" onclick="openModal()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
@@ -518,8 +518,8 @@
 <div class="modal">
   <div class="modal-header">
     <div>
-      <h2>Customer Configuration</h2>
-      <div class="sub">Setting You Up for Success. Complete all sections, then generate your config sheet.</div>
+      <h2>Dash Camera System Configuration</h2>
+      <div class="sub">Setting You Up for Success. Complete all sections, then generate your approval sheet.</div>
     </div>
     <button class="modal-close" onclick="closeModal()">&times;</button>
   </div>
@@ -573,6 +573,21 @@
         <div style="background:var(--teal-glow);border:1px solid rgba(0,174,239,0.2);border-radius:8px;padding:12px 16px;margin-top:6px">
           <label style="font-size:.88rem;color:var(--navy);font-weight:600;display:flex;align-items:center;gap:6px"><input type="checkbox" id="f_ai_only" style="accent-color:var(--teal)"> Enable AI Driver Coaching Only (no video storage) <span class="info-tip" data-tip="AI detects phone use, drowsiness, and seatbelt compliance, delivering real-time in-cab voice coaching WITHOUT storing any video footage. Ideal for privacy-conscious fleets. Select 'Driver Facing – No' above to use this option.">i</span></label>
         </div>
+
+        <!-- AUXILIARY CAMERAS -->
+        <div style="margin-top:14px;border-top:1px solid var(--g100);padding-top:14px">
+          <label style="font-size:.9rem;color:var(--g800);display:flex;align-items:center;gap:6px;font-weight:600"><input type="checkbox" id="f_aux" style="accent-color:var(--teal)"> Auxiliary Camera Installations <span class="info-tip" data-tip="Additional cameras mounted on the exterior or interior of your vehicle(s) beyond the primary road-facing and driver-facing unit. Options include rear-facing, side-facing, and additional internal cameras.">i</span></label>
+          <div id="auxOptions" style="display:none;margin-top:10px;margin-left:24px;flex-direction:column;gap:6px">
+            <label style="font-size:.86rem;color:var(--g800);display:flex;align-items:center;gap:5px"><input type="checkbox" id="f_aux_rear" style="accent-color:var(--teal)"> Rear-Facing Camera</label>
+            <label style="font-size:.86rem;color:var(--g800);display:flex;align-items:center;gap:5px"><input type="checkbox" id="f_aux_left" style="accent-color:var(--teal)"> Left Side Camera</label>
+            <label style="font-size:.86rem;color:var(--g800);display:flex;align-items:center;gap:5px"><input type="checkbox" id="f_aux_right" style="accent-color:var(--teal)"> Right Side Camera</label>
+            <label style="font-size:.86rem;color:var(--g800);display:flex;align-items:center;gap:5px"><input type="checkbox" id="f_aux_internal" style="accent-color:var(--teal)"> Additional Internal Camera</label>
+          </div>
+          <div id="auxDisclaimer" style="display:none;background:rgba(231,76,60,0.06);border:1px solid rgba(231,76,60,0.2);border-radius:8px;padding:14px 16px;margin-top:10px">
+            <p style="font-size:.8rem;color:var(--g800);line-height:1.5;margin:0"><strong style="color:var(--red-soft)">Important Notice:</strong> Installation of auxiliary cameras on the exterior of your fleet vehicle(s) will require drilled holes and cables to be routed and secured in the vehicles. By signing this form you agree to this in advance and approve this installation method for installing and mounting cameras on the exterior / outside of your fleet vehicle(s).</p>
+            <label style="font-size:.84rem;color:var(--navy);font-weight:600;display:flex;align-items:center;gap:6px;margin-top:10px"><input type="checkbox" id="f_aux_agree" style="accent-color:var(--red-soft)"> I understand and approve the auxiliary camera installation method described above</label>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -582,7 +597,8 @@
       <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
         <label style="font-size:.88rem;color:var(--g800);display:flex;align-items:center;gap:6px"><input type="checkbox" id="f_notif_email" checked style="accent-color:var(--teal)"> Real-Time Email Alerts <span class="info-tip" data-tip="An email is sent to designated recipients immediately when a rule violation occurs.">i</span></label>
         <label style="font-size:.88rem;color:var(--g800);display:flex;align-items:center;gap:6px"><input type="checkbox" id="f_notif_sms" style="accent-color:var(--teal)"> Real-Time SMS / Text Alerts <span class="info-tip" data-tip="A text message is sent immediately when a rule triggers. Best for managers needing instant awareness.">i</span></label>
-        <label style="font-size:.88rem;color:var(--g800);display:flex;align-items:center;gap:6px"><input type="checkbox" id="f_notif_tts" checked style="accent-color:var(--teal)"> Text-to-Speech Driver Coaching <span class="info-tip" data-tip="An automated voice message plays through the driver's cab speaker the moment a rule triggers. Multiple actions can be selected per rule.">i</span></label>
+        <label style="font-size:.88rem;color:var(--g800);display:flex;align-items:center;gap:6px"><input type="checkbox" id="f_notif_beep" style="accent-color:var(--teal)"> Real-Time Audible Beep Alerts <span class="info-tip" data-tip="An audible beep sounds through the camera speaker the moment a rule triggers, alerting the driver to the event. Simple and non-verbal.">i</span></label>
+        <label style="font-size:.88rem;color:var(--g800);display:flex;align-items:center;gap:6px"><input type="checkbox" id="f_notif_tts" checked style="accent-color:var(--teal)"> Real-Time Audible Text-to-Speech Alerts (talks to driver) <span class="info-tip" data-tip="An automated voice message plays through the camera speaker the moment a rule triggers, verbally coaching the driver on what was detected. For example: 'Phone use detected, please keep your eyes on the road.' Multiple actions can be selected per rule.">i</span></label>
       </div>
       <div class="form-row one-col"><div class="form-group"><label>Notification Recipients (name / email)</label><input type="text" id="f_notif_recip" placeholder="e.g. John Smith / john@company.com"></div></div>
     </div>
@@ -596,7 +612,7 @@
         <div class="rule-header"><div class="rule-name"><input type="checkbox" checked> Seatbelt</div><div class="rec-badge">Rec: Snapshot + Text-to-Speech</div></div>
         <div class="rule-options">
           <div class="opt-group"><div class="opt-label">Capture <span class="info-tip" data-tip="Video: short clip (~10-30 sec), counts toward 15/day limit. Snapshot: still image, unlimited. Log Only: GPS + timestamp, no media.">i</span></div><div class="opt-choices"><label><input type="checkbox" data-rule="seatbelt" data-type="capture" value="Video"> Video</label><label><input type="checkbox" data-rule="seatbelt" data-type="capture" value="Snapshot" checked> Snapshot</label><label><input type="checkbox" data-rule="seatbelt" data-type="capture" value="Log Only"> Log Only</label></div></div>
-          <div class="opt-group"><div class="opt-label">Action <span class="info-tip" data-tip="Email/SMS: sends alert to contacts. Text-to-Speech: in-cab voice coaching. Log Only: silent record. Multiple can be selected.">i</span></div><div class="opt-choices"><label><input type="checkbox" data-rule="seatbelt" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="seatbelt" data-type="action" value="SMS"> SMS</label><label><input type="checkbox" data-rule="seatbelt" data-type="action" value="Text-to-Speech" checked> TTS</label><label><input type="checkbox" data-rule="seatbelt" data-type="action" value="Log Only"> Log Only</label></div></div>
+          <div class="opt-group"><div class="opt-label">Action <span class="info-tip" data-tip="Email/SMS: sends alert to contacts. Text-to-Speech: automated voice coaches the driver out loud. Log Only: silent record. Multiple can be selected.">i</span></div><div class="opt-choices"><label><input type="checkbox" data-rule="seatbelt" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="seatbelt" data-type="action" value="SMS"> SMS</label><label><input type="checkbox" data-rule="seatbelt" data-type="action" value="Text-to-Speech" checked> TTS</label><label><input type="checkbox" data-rule="seatbelt" data-type="action" value="Log Only"> Log Only</label></div></div>
         </div>
       </div>
       <div class="rule-block" id="rule_speeding">
@@ -638,7 +654,7 @@
       <div class="rule-block"><div class="rule-header"><div class="rule-name"><input type="checkbox" id="f_hard_accel"> Hard Acceleration</div></div>
         <div class="rule-options"><div class="opt-group"><div class="opt-label">Capture</div><div class="opt-choices"><label><input type="checkbox" data-rule="accel" data-type="capture" value="Video"> Video</label><label><input type="checkbox" data-rule="accel" data-type="capture" value="Snapshot"> Snapshot</label><label><input type="checkbox" data-rule="accel" data-type="capture" value="Log Only"> Log Only</label></div></div><div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="accel" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="accel" data-type="action" value="SMS"> SMS</label><label><input type="checkbox" data-rule="accel" data-type="action" value="Text-to-Speech"> TTS</label><label><input type="checkbox" data-rule="accel" data-type="action" value="Log Only"> Log Only</label></div></div></div>
       </div>
-      <div class="rule-block"><div class="rule-header"><div class="rule-name"><input type="checkbox" id="f_rolling"> Rolling Stop <span style="font-size:.72rem;color:var(--g400);font-weight:400;margin-left:4px">(requires ZenCam Plus)</span></div></div>
+      <div class="rule-block"><div class="rule-header"><div class="rule-name"><input type="checkbox" id="f_rolling"> Rolling Stop <span style="font-size:.72rem;color:var(--g400);font-weight:400;margin-left:4px">(requires Geotab GO Focus PLUS or ZenCAM PLUS model camera)</span></div></div>
         <div class="rule-options"><div class="opt-group"><div class="opt-label">Capture</div><div class="opt-choices"><label><input type="checkbox" data-rule="rolling" data-type="capture" value="Video"> Video</label><label><input type="checkbox" data-rule="rolling" data-type="capture" value="Snapshot"> Snapshot</label><label><input type="checkbox" data-rule="rolling" data-type="capture" value="Log Only"> Log Only</label></div></div><div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="rolling" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="rolling" data-type="action" value="SMS"> SMS</label><label><input type="checkbox" data-rule="rolling" data-type="action" value="Text-to-Speech"> TTS</label><label><input type="checkbox" data-rule="rolling" data-type="action" value="Log Only"> Log Only</label></div></div></div>
       </div>
     </div>
@@ -654,7 +670,7 @@
     <!-- AUTHORIZATION -->
     <div class="form-section">
       <div class="form-section-title"><span class="accent-bar"></span>Authorization</div>
-      <p style="font-size:.82rem;color:var(--g600);margin-bottom:12px">By generating this configuration sheet, you confirm the information is accurate and authorize Traxxis GPS to configure your system accordingly.</p>
+      <p style="font-size:.82rem;color:var(--g600);margin-bottom:12px">By generating this approval sheet, you confirm the information is accurate and authorize Traxxis GPS to configure your dash camera system according to the selections on this form.</p>
       <div class="form-row">
         <div class="form-group"><label>Authorized Name</label><input type="text" id="f_auth_name"></div>
         <div class="form-group"><label>Title</label><input type="text" id="f_auth_title"></div>
@@ -667,7 +683,7 @@
   <div class="modal-footer">
     <button class="btn-generate" onclick="generatePDF()">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-      Generate Configuration PDF
+      Generate Configuration Approval PDF
     </button>
     <button class="btn-email" onclick="sendForSignature()">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -720,7 +736,7 @@ function generatePDF(){
   function addHeader(pageNum){
     doc.setFillColor(15,43,76);doc.rect(0,0,W,12,  'F');
     doc.setFillColor(247,148,29);doc.rect(0,12,W,2,'F');
-    doc.setFontSize(7);doc.setTextColor(255);doc.text('TRAXXIS GPS SOLUTIONS  |  CUSTOMER CONFIGURATION SHEET',M,8);
+    doc.setFontSize(7);doc.setTextColor(255);doc.text('TRAXXIS GPS SOLUTIONS  |  CUSTOMER DASH CAMERA SYSTEM CONFIGURATION APPROVAL',M,8);
     doc.text('traxxisgps.com  |  888.447.7059',W-M,8,{align:'right'});
     doc.setFillColor(15,43,76);doc.rect(0,267,W,12,'F');
     doc.setTextColor(255);doc.setFontSize(6.5);
@@ -759,7 +775,9 @@ function generatePDF(){
   addHeader(1);
   y=22;
   doc.setFontSize(18);doc.setTextColor(15,43,76);doc.setFont('helvetica','bold');
-  doc.text('Customer Configuration Sheet',M,y);
+  doc.text('Traxxis GPS Solutions',M,y);
+  y+=6;doc.setFontSize(13);doc.setTextColor(15,43,76);
+  doc.text('Customer Dash Camera System Configuration Approval Sheet',M,y);
   y+=6;doc.setFontSize(9);doc.setTextColor(0,174,239);doc.setFont('helvetica','normal');
   doc.text('Setting You Up for Success',M,y);
   y+=10;
@@ -795,11 +813,32 @@ function generatePDF(){
   fieldRow('Audio Recording',document.getElementById('f_audio').checked?'Enabled':'Disabled');
   fieldRow('Shutdown Delay',getRadio('shutdown'));
   fieldRow('AI Coaching Only',document.getElementById('f_ai_only').checked?'Yes':'No');
+  // Auxiliary cameras
+  if(document.getElementById('f_aux').checked){
+    fieldRow('Auxiliary Cameras','Yes');
+    const auxList=[];
+    if(document.getElementById('f_aux_rear').checked) auxList.push('Rear-Facing');
+    if(document.getElementById('f_aux_left').checked) auxList.push('Left Side');
+    if(document.getElementById('f_aux_right').checked) auxList.push('Right Side');
+    if(document.getElementById('f_aux_internal').checked) auxList.push('Additional Internal');
+    fieldRow('Aux Positions',auxList.join(', ')||'None selected');
+    fieldRow('Aux Approved',document.getElementById('f_aux_agree').checked?'Yes - Approved':'NOT YET APPROVED');
+    y+=2;
+    if(y>248){doc.addPage();y=22;addHeader(2);}
+    doc.setFontSize(6.5);doc.setTextColor(180,60,60);doc.setFont('helvetica','italic');
+    const discText='Notice: Installation of auxiliary cameras on the exterior of fleet vehicle(s) will require drilled holes and cables to be routed and secured. By signing, the customer agrees to and approves this installation method.';
+    const discLines=doc.splitTextToSize(discText,UW);
+    doc.text(discLines,M,y);
+    y+=discLines.length*3.5+2;
+  } else {
+    fieldRow('Auxiliary Cameras','No');
+  }
   y+=3;
 
   sectionTitle('NOTIFICATIONS & ALERTS');
   fieldRow('Email Alerts',document.getElementById('f_notif_email').checked?'Yes':'No');
   fieldRow('SMS Alerts',document.getElementById('f_notif_sms').checked?'Yes':'No');
+  fieldRow('Audible Beep',document.getElementById('f_notif_beep').checked?'Yes':'No');
   fieldRow('Text-to-Speech',document.getElementById('f_notif_tts').checked?'Yes':'No');
   fieldRow('Recipients',document.getElementById('f_notif_recip').value);
   y+=3;
@@ -834,7 +873,8 @@ function generatePDF(){
   doc.setDrawColor(200);doc.line(M,y,M+80,y);
   doc.setFontSize(7);doc.setTextColor(140);doc.text('Signature',M,y+4);
 
-  doc.save('Traxxis_GPS_Configuration_Sheet.pdf');
+  const companyName = (document.getElementById('f_account').value || 'Company').replace(/[^a-zA-Z0-9 ]/g,'').trim().replace(/\s+/g,'_');
+  doc.save(companyName + '_Camera_Configuration_Approval.pdf');
 }
 
 // ─── SEND FOR SIGNATURE ───
@@ -842,13 +882,26 @@ function sendForSignature(){
   const email=document.getElementById('f_admin_email').value;
   const name=document.getElementById('f_admin_name').value;
   if(!email){alert('Please enter the Primary Admin email address first.');return}
-  const subject=encodeURIComponent('Traxxis GPS - Configuration Sheet for Signature');
-  const body=encodeURIComponent('Hi '+(name||'there')+',\n\nPlease review and sign the attached Traxxis GPS Configuration Sheet.\n\nIf you have any questions, call us at 888.447.7059.\n\nThank you,\nTraxxis GPS Solutions');
+  const subject=encodeURIComponent('Traxxis GPS - Dash Camera Configuration Approval for Signature');
+  const body=encodeURIComponent('Hi '+(name||'there')+',\n\nPlease review and sign the attached Traxxis GPS Dash Camera Configuration Approval Sheet.\n\nIf you have any questions, call us at 888.447.7059.\n\nThank you,\nTraxxis GPS Solutions');
   window.open('mailto:'+email+'?subject='+subject+'&body='+body);
 }
 
 // Set today's date as default
 document.getElementById('f_auth_date').valueAsDate=new Date();
+
+// Auxiliary camera toggle
+document.getElementById('f_aux').addEventListener('change',function(){
+  document.getElementById('auxOptions').style.display=this.checked?'flex':'none';
+  document.getElementById('auxDisclaimer').style.display=this.checked?'block':'none';
+  if(!this.checked){
+    document.getElementById('f_aux_rear').checked=false;
+    document.getElementById('f_aux_left').checked=false;
+    document.getElementById('f_aux_right').checked=false;
+    document.getElementById('f_aux_internal').checked=false;
+    document.getElementById('f_aux_agree').checked=false;
+  }
+});
 </script>
 </body>
 </html>
