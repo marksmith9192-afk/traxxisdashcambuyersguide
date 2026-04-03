@@ -196,6 +196,7 @@
   .selection-branch.active{display:block}
   .workflow-gate{display:none}
   .workflow-hint{font-size:.8rem;color:var(--g400);margin-top:12px}
+  .camera-specific{display:none}
   @media(max-width:600px){.selection-tree .choice-list.inline{grid-template-columns:1fr}}
 
   /* ─── TOOLTIP ─── */
@@ -580,7 +581,7 @@
           </label>
           <label class="selection-card">
             <input type="radio" name="system_type" value="Geotab">
-            <span><strong>Geotab</strong><span>Use this flow for GO Focus and GO Focus Plus cameras.</span></span>
+            <span><strong>Geotab</strong><span>Use this flow for GO Focus Plus cameras.</span></span>
           </label>
         </div>
 
@@ -601,10 +602,6 @@
         <div id="geotabOptions" class="selection-branch">
           <div class="group-label">Geotab camera selection</div>
           <div class="choice-list">
-            <label class="selection-card">
-              <input type="radio" name="camera_model" value="GO Focus">
-              <span><strong>GO Focus</strong><span>Standard Geotab camera workflow.</span></span>
-            </label>
             <label class="selection-card">
               <input type="radio" name="camera_model" value="GO Focus Plus">
               <span><strong>GO Focus Plus</strong><span>Enhanced Geotab camera workflow.</span></span>
@@ -632,7 +629,7 @@
           <label style="font-size:.85rem;display:flex;align-items:center;gap:3px;cursor:pointer"><input type="radio" name="shutdown" value="45 min" style="accent-color:var(--teal)"> 45 min</label>
           <label style="font-size:.85rem;display:flex;align-items:center;gap:3px;cursor:pointer"><input type="radio" name="shutdown" value="60 min" style="accent-color:var(--teal)"> 60 min</label>
         </div>
-        <div style="background:var(--teal-glow);border:1px solid rgba(0,174,239,0.2);border-radius:8px;padding:12px 16px;margin-top:6px">
+        <div id="aiCoachingBlock" class="camera-specific" data-cameras="Surfsight" style="background:var(--teal-glow);border:1px solid rgba(0,174,239,0.2);border-radius:8px;padding:12px 16px;margin-top:6px">
           <label style="font-size:.88rem;color:var(--navy);font-weight:600;display:flex;align-items:center;gap:6px"><input type="checkbox" id="f_ai_only" style="accent-color:var(--teal)"> Enable AI Driver Coaching Only (no video storage) <span class="info-tip" data-tip="AI detects phone use, drowsiness, and seatbelt compliance, delivering real-time in-cab voice coaching WITHOUT storing any video footage. Ideal for privacy-conscious fleets. Select 'Driver Facing – No' above to use this option.">i</span></label>
         </div>
 
@@ -660,7 +657,7 @@
         <label style="font-size:.88rem;color:var(--g800);display:flex;align-items:center;gap:6px"><input type="checkbox" id="f_notif_email" checked style="accent-color:var(--teal)"> Real-Time Email Alerts <span class="info-tip" data-tip="An email is sent to designated recipients immediately when a rule violation occurs.">i</span></label>
         <label style="font-size:.88rem;color:var(--g800);display:flex;align-items:center;gap:6px"><input type="checkbox" id="f_notif_sms" style="accent-color:var(--teal)"> Real-Time SMS / Text Alerts <span class="info-tip" data-tip="A text message is sent immediately when a rule triggers. Best for managers needing instant awareness.">i</span></label>
         <label style="font-size:.88rem;color:var(--g800);display:flex;align-items:center;gap:6px"><input type="checkbox" id="f_notif_beep" style="accent-color:var(--teal)"> Real-Time Audible Beep Alerts <span class="info-tip" data-tip="An audible beep sounds through the camera speaker the moment a rule triggers, alerting the driver to the event. Simple and non-verbal.">i</span></label>
-        <label style="font-size:.88rem;color:var(--g800);display:flex;align-items:center;gap:6px"><input type="checkbox" id="f_notif_tts" checked style="accent-color:var(--teal)"> Real-Time Audible Text-to-Speech Alerts (talks to driver) <span class="info-tip" data-tip="An automated voice message plays through the camera speaker the moment a rule triggers, verbally coaching the driver on what was detected. For example: 'Phone use detected, please keep your eyes on the road.' Multiple actions can be selected per rule.">i</span></label>
+        <label id="notifVoiceLabel" style="font-size:.88rem;color:var(--g800);display:flex;align-items:center;gap:6px"><input type="checkbox" id="f_notif_tts" checked style="accent-color:var(--teal)"> <span id="notifVoiceText">Real-Time Audible Text-to-Speech Alerts (talks to driver)</span> <span id="notifVoiceTip" class="info-tip" data-tip="An automated voice message plays through the camera speaker the moment a rule triggers, verbally coaching the driver on what was detected. For example: 'Phone use detected, please keep your eyes on the road.' Multiple actions can be selected per rule.">i</span></label>
       </div>
       <div class="form-row one-col"><div class="form-group"><label>Notification Recipients (name / email)</label><input type="text" id="f_notif_recip" placeholder="e.g. John Smith / john@company.com"></div></div>
     </div>
@@ -671,38 +668,38 @@
       <p style="font-size:.78rem;color:var(--g400);margin-bottom:14px">Green badges show Traxxis GPS recommended settings. Video is limited to 15 events/day per vehicle. Snapshots and logs are unlimited.</p>
 
       <div class="rule-block" id="rule_seatbelt">
-        <div class="rule-header"><div class="rule-name"><input type="checkbox" checked> Seatbelt</div><div class="rec-badge">Rec: Snapshot + Text-to-Speech</div></div>
+        <div class="rule-header"><div class="rule-name"><input type="checkbox" checked> Seatbelt</div><div class="rec-badge" data-voice-badge="Snapshot + Text-to-Speech">Rec: Snapshot + Text-to-Speech</div></div>
         <div class="rule-options">
           <div class="opt-group"><div class="opt-label">Capture <span class="info-tip" data-tip="Video: short clip (~10-30 sec), counts toward 15/day limit. Snapshot: still image, unlimited. Log Only: GPS + timestamp, no media.">i</span></div><div class="opt-choices"><label><input type="checkbox" data-rule="seatbelt" data-type="capture" value="Video"> Video</label><label><input type="checkbox" data-rule="seatbelt" data-type="capture" value="Snapshot" checked> Snapshot</label><label><input type="checkbox" data-rule="seatbelt" data-type="capture" value="Log Only"> Log Only</label></div></div>
-          <div class="opt-group"><div class="opt-label">Action <span class="info-tip" data-tip="Email/SMS: sends alert to contacts. Text-to-Speech: automated voice coaches the driver out loud. Log Only: silent record. Multiple can be selected.">i</span></div><div class="opt-choices"><label><input type="checkbox" data-rule="seatbelt" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="seatbelt" data-type="action" value="SMS"> SMS</label><label><input type="checkbox" data-rule="seatbelt" data-type="action" value="Text-to-Speech" checked> TTS</label><label><input type="checkbox" data-rule="seatbelt" data-type="action" value="Log Only"> Log Only</label></div></div>
+          <div class="opt-group"><div class="opt-label">Action <span id="voiceActionTip" class="info-tip" data-tip="Email/SMS: sends alert to contacts. Text-to-Speech: automated voice coaches the driver out loud. Log Only: silent record. Multiple can be selected.">i</span></div><div class="opt-choices"><label><input type="checkbox" data-rule="seatbelt" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="seatbelt" data-type="action" value="SMS"> SMS</label><label class="voice-option-label"><input type="checkbox" data-rule="seatbelt" data-type="action" value="Text-to-Speech" checked> <span class="voice-option-text">TTS</span></label><label><input type="checkbox" data-rule="seatbelt" data-type="action" value="Log Only"> Log Only</label></div></div>
         </div>
       </div>
       <div class="rule-block" id="rule_speeding">
         <div class="rule-header"><div class="rule-name"><input type="checkbox" checked> Speeding</div><div class="rec-badge">Rec: Log Only + Log Only</div></div>
         <div class="rule-options">
           <div class="opt-group"><div class="opt-label">Capture</div><div class="opt-choices"><label><input type="checkbox" data-rule="speeding" data-type="capture" value="Video"> Video</label><label><input type="checkbox" data-rule="speeding" data-type="capture" value="Snapshot"> Snapshot</label><label><input type="checkbox" data-rule="speeding" data-type="capture" value="Log Only" checked> Log Only</label></div></div>
-          <div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="speeding" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="speeding" data-type="action" value="SMS"> SMS</label><label><input type="checkbox" data-rule="speeding" data-type="action" value="Text-to-Speech"> TTS</label><label><input type="checkbox" data-rule="speeding" data-type="action" value="Log Only" checked> Log Only</label></div></div>
+          <div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="speeding" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="speeding" data-type="action" value="SMS"> SMS</label><label class="voice-option-label"><input type="checkbox" data-rule="speeding" data-type="action" value="Text-to-Speech"> <span class="voice-option-text">TTS</span></label><label><input type="checkbox" data-rule="speeding" data-type="action" value="Log Only" checked> Log Only</label></div></div>
         </div>
       </div>
       <div class="rule-block" id="rule_braking">
         <div class="rule-header"><div class="rule-name"><input type="checkbox" checked> Hard Braking</div><div class="rec-badge">Rec: Video + Log Only</div></div>
         <div class="rule-options">
           <div class="opt-group"><div class="opt-label">Capture</div><div class="opt-choices"><label><input type="checkbox" data-rule="braking" data-type="capture" value="Video" checked> Video</label><label><input type="checkbox" data-rule="braking" data-type="capture" value="Snapshot"> Snapshot</label><label><input type="checkbox" data-rule="braking" data-type="capture" value="Log Only"> Log Only</label></div></div>
-          <div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="braking" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="braking" data-type="action" value="SMS"> SMS</label><label><input type="checkbox" data-rule="braking" data-type="action" value="Text-to-Speech"> TTS</label><label><input type="checkbox" data-rule="braking" data-type="action" value="Log Only" checked> Log Only</label></div></div>
+          <div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="braking" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="braking" data-type="action" value="SMS"> SMS</label><label class="voice-option-label"><input type="checkbox" data-rule="braking" data-type="action" value="Text-to-Speech"> <span class="voice-option-text">TTS</span></label><label><input type="checkbox" data-rule="braking" data-type="action" value="Log Only" checked> Log Only</label></div></div>
         </div>
       </div>
       <div class="rule-block" id="rule_phone">
-        <div class="rule-header"><div class="rule-name"><input type="checkbox" checked> Cell Phone Use</div><div class="rec-badge">Rec: Snapshot + Text-to-Speech</div></div>
+        <div class="rule-header"><div class="rule-name"><input type="checkbox" checked> Cell Phone Use</div><div class="rec-badge" data-voice-badge="Snapshot + Text-to-Speech">Rec: Snapshot + Text-to-Speech</div></div>
         <div class="rule-options">
           <div class="opt-group"><div class="opt-label">Capture</div><div class="opt-choices"><label><input type="checkbox" data-rule="phone" data-type="capture" value="Video"> Video</label><label><input type="checkbox" data-rule="phone" data-type="capture" value="Snapshot" checked> Snapshot</label><label><input type="checkbox" data-rule="phone" data-type="capture" value="Log Only"> Log Only</label></div></div>
-          <div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="phone" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="phone" data-type="action" value="SMS"> SMS</label><label><input type="checkbox" data-rule="phone" data-type="action" value="Text-to-Speech" checked> TTS</label><label><input type="checkbox" data-rule="phone" data-type="action" value="Log Only"> Log Only</label></div></div>
+          <div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="phone" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="phone" data-type="action" value="SMS"> SMS</label><label class="voice-option-label"><input type="checkbox" data-rule="phone" data-type="action" value="Text-to-Speech" checked> <span class="voice-option-text">TTS</span></label><label><input type="checkbox" data-rule="phone" data-type="action" value="Log Only"> Log Only</label></div></div>
         </div>
       </div>
       <div class="rule-block" id="rule_tailgating">
-        <div class="rule-header"><div class="rule-name"><input type="checkbox" checked> Tailgating</div><div class="rec-badge">Rec: Video + Text-to-Speech</div></div>
+        <div class="rule-header"><div class="rule-name"><input type="checkbox" checked> Tailgating</div><div class="rec-badge" data-voice-badge="Video + Text-to-Speech">Rec: Video + Text-to-Speech</div></div>
         <div class="rule-options">
           <div class="opt-group"><div class="opt-label">Capture</div><div class="opt-choices"><label><input type="checkbox" data-rule="tailgating" data-type="capture" value="Video" checked> Video</label><label><input type="checkbox" data-rule="tailgating" data-type="capture" value="Snapshot"> Snapshot</label><label><input type="checkbox" data-rule="tailgating" data-type="capture" value="Log Only"> Log Only</label></div></div>
-          <div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="tailgating" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="tailgating" data-type="action" value="SMS"> SMS</label><label><input type="checkbox" data-rule="tailgating" data-type="action" value="Text-to-Speech" checked> TTS</label><label><input type="checkbox" data-rule="tailgating" data-type="action" value="Log Only"> Log Only</label></div></div>
+          <div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="tailgating" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="tailgating" data-type="action" value="SMS"> SMS</label><label class="voice-option-label"><input type="checkbox" data-rule="tailgating" data-type="action" value="Text-to-Speech" checked> <span class="voice-option-text">TTS</span></label><label><input type="checkbox" data-rule="tailgating" data-type="action" value="Log Only"> Log Only</label></div></div>
         </div>
       </div>
     </div>
@@ -711,13 +708,16 @@
     <div class="form-section">
       <div class="form-section-title"><span class="accent-bar"></span>Optional Safety Rules</div>
       <div class="rule-block"><div class="rule-header"><div class="rule-name"><input type="checkbox" id="f_hard_turns"> Hard Turns</div></div>
-        <div class="rule-options"><div class="opt-group"><div class="opt-label">Capture</div><div class="opt-choices"><label><input type="checkbox" data-rule="turns" data-type="capture" value="Video"> Video</label><label><input type="checkbox" data-rule="turns" data-type="capture" value="Snapshot"> Snapshot</label><label><input type="checkbox" data-rule="turns" data-type="capture" value="Log Only"> Log Only</label></div></div><div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="turns" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="turns" data-type="action" value="SMS"> SMS</label><label><input type="checkbox" data-rule="turns" data-type="action" value="Text-to-Speech"> TTS</label><label><input type="checkbox" data-rule="turns" data-type="action" value="Log Only"> Log Only</label></div></div></div>
+        <div class="rule-options"><div class="opt-group"><div class="opt-label">Capture</div><div class="opt-choices"><label><input type="checkbox" data-rule="turns" data-type="capture" value="Video"> Video</label><label><input type="checkbox" data-rule="turns" data-type="capture" value="Snapshot"> Snapshot</label><label><input type="checkbox" data-rule="turns" data-type="capture" value="Log Only"> Log Only</label></div></div><div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="turns" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="turns" data-type="action" value="SMS"> SMS</label><label class="voice-option-label"><input type="checkbox" data-rule="turns" data-type="action" value="Text-to-Speech"> <span class="voice-option-text">TTS</span></label><label><input type="checkbox" data-rule="turns" data-type="action" value="Log Only"> Log Only</label></div></div></div>
       </div>
       <div class="rule-block"><div class="rule-header"><div class="rule-name"><input type="checkbox" id="f_hard_accel"> Hard Acceleration</div></div>
-        <div class="rule-options"><div class="opt-group"><div class="opt-label">Capture</div><div class="opt-choices"><label><input type="checkbox" data-rule="accel" data-type="capture" value="Video"> Video</label><label><input type="checkbox" data-rule="accel" data-type="capture" value="Snapshot"> Snapshot</label><label><input type="checkbox" data-rule="accel" data-type="capture" value="Log Only"> Log Only</label></div></div><div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="accel" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="accel" data-type="action" value="SMS"> SMS</label><label><input type="checkbox" data-rule="accel" data-type="action" value="Text-to-Speech"> TTS</label><label><input type="checkbox" data-rule="accel" data-type="action" value="Log Only"> Log Only</label></div></div></div>
+        <div class="rule-options"><div class="opt-group"><div class="opt-label">Capture</div><div class="opt-choices"><label><input type="checkbox" data-rule="accel" data-type="capture" value="Video"> Video</label><label><input type="checkbox" data-rule="accel" data-type="capture" value="Snapshot"> Snapshot</label><label><input type="checkbox" data-rule="accel" data-type="capture" value="Log Only"> Log Only</label></div></div><div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="accel" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="accel" data-type="action" value="SMS"> SMS</label><label class="voice-option-label"><input type="checkbox" data-rule="accel" data-type="action" value="Text-to-Speech"> <span class="voice-option-text">TTS</span></label><label><input type="checkbox" data-rule="accel" data-type="action" value="Log Only"> Log Only</label></div></div></div>
       </div>
-      <div class="rule-block"><div class="rule-header"><div class="rule-name"><input type="checkbox" id="f_rolling"> Rolling Stop <span style="font-size:.72rem;color:var(--g400);font-weight:400;margin-left:4px">(requires Geotab GO Focus PLUS or ZenCAM PLUS model camera)</span></div></div>
-        <div class="rule-options"><div class="opt-group"><div class="opt-label">Capture</div><div class="opt-choices"><label><input type="checkbox" data-rule="rolling" data-type="capture" value="Video"> Video</label><label><input type="checkbox" data-rule="rolling" data-type="capture" value="Snapshot"> Snapshot</label><label><input type="checkbox" data-rule="rolling" data-type="capture" value="Log Only"> Log Only</label></div></div><div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="rolling" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="rolling" data-type="action" value="SMS"> SMS</label><label><input type="checkbox" data-rule="rolling" data-type="action" value="Text-to-Speech"> TTS</label><label><input type="checkbox" data-rule="rolling" data-type="action" value="Log Only"> Log Only</label></div></div></div>
+      <div id="rollingRuleBlock" class="rule-block camera-specific" data-cameras="ZenCam Model,GO Focus Plus"><div class="rule-header"><div class="rule-name"><input type="checkbox" id="f_rolling"> Rolling Stop <span id="rollingStopTip" style="font-size:.72rem;color:var(--g400);font-weight:400;margin-left:4px">(Requires ZenCam Plus Model Camera)</span></div></div>
+        <div class="rule-options"><div class="opt-group"><div class="opt-label">Capture</div><div class="opt-choices"><label><input type="checkbox" data-rule="rolling" data-type="capture" value="Video"> Video</label><label><input type="checkbox" data-rule="rolling" data-type="capture" value="Snapshot"> Snapshot</label><label><input type="checkbox" data-rule="rolling" data-type="capture" value="Log Only"> Log Only</label></div></div><div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="rolling" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="rolling" data-type="action" value="SMS"> SMS</label><label class="voice-option-label"><input type="checkbox" data-rule="rolling" data-type="action" value="Text-to-Speech"> <span class="voice-option-text">TTS</span></label><label><input type="checkbox" data-rule="rolling" data-type="action" value="Log Only"> Log Only</label></div></div></div>
+      </div>
+      <div id="idlingRuleBlock" class="rule-block camera-specific" data-cameras="ZenCam Model,GO Focus Plus"><div class="rule-header"><div class="rule-name"><input type="checkbox" id="f_idling"> Idling</div></div>
+        <div class="rule-options"><div class="opt-group"><div class="opt-label">Capture</div><div class="opt-choices"><label><input type="checkbox" data-rule="idling" data-type="capture" value="Video"> Video</label><label><input type="checkbox" data-rule="idling" data-type="capture" value="Snapshot"> Snapshot</label><label><input type="checkbox" data-rule="idling" data-type="capture" value="Log Only" checked> Log Only</label></div></div><div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="idling" data-type="action" value="Email"> Email</label><label><input type="checkbox" data-rule="idling" data-type="action" value="SMS"> SMS</label><label class="voice-option-label"><input type="checkbox" data-rule="idling" data-type="action" value="Text-to-Speech"> <span class="voice-option-text">TTS</span></label><label><input type="checkbox" data-rule="idling" data-type="action" value="Log Only" checked> Log Only</label></div></div></div>
       </div>
     </div>
 
@@ -726,7 +726,7 @@
       <div class="form-section-title"><span class="accent-bar"></span>SOS Button: Driver-Initiated Recording</div>
       <p style="font-size:.82rem;color:var(--g600);margin-bottom:12px">Driver presses the camera button to manually record a near-miss, hazard, or incident. <span class="info-tip" data-tip="The SOS button on the camera allows a driver to manually trigger a video recording at any time to document a near-miss, road hazard, or incident. Recommended: Video + SMS or Email alert to a manager.">i</span></p>
       <div class="form-row one-col" style="margin-bottom:14px"><div class="form-group"><label>Who will be notified? (name / email / phone)</label><input type="text" id="f_sos_notify" placeholder="e.g. Fleet Manager / manager@company.com / 555-123-4567"></div></div>
-      <div class="rule-options"><div class="opt-group"><div class="opt-label">Capture</div><div class="opt-choices"><label><input type="checkbox" data-rule="sos" data-type="capture" value="Video" checked> Video</label><label><input type="checkbox" data-rule="sos" data-type="capture" value="Snapshot"> Snapshot</label><label><input type="checkbox" data-rule="sos" data-type="capture" value="Log Only"> Log Only</label></div></div><div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="sos" data-type="action" value="Email" checked> Email</label><label><input type="checkbox" data-rule="sos" data-type="action" value="SMS" checked> SMS</label><label><input type="checkbox" data-rule="sos" data-type="action" value="Text-to-Speech"> TTS</label><label><input type="checkbox" data-rule="sos" data-type="action" value="Log Only"> Log Only</label></div></div></div>
+      <div class="rule-options"><div class="opt-group"><div class="opt-label">Capture</div><div class="opt-choices"><label><input type="checkbox" data-rule="sos" data-type="capture" value="Video" checked> Video</label><label><input type="checkbox" data-rule="sos" data-type="capture" value="Snapshot"> Snapshot</label><label><input type="checkbox" data-rule="sos" data-type="capture" value="Log Only"> Log Only</label></div></div><div class="opt-group"><div class="opt-label">Action</div><div class="opt-choices"><label><input type="checkbox" data-rule="sos" data-type="action" value="Email" checked> Email</label><label><input type="checkbox" data-rule="sos" data-type="action" value="SMS" checked> SMS</label><label class="voice-option-label"><input type="checkbox" data-rule="sos" data-type="action" value="Text-to-Speech"> <span class="voice-option-text">TTS</span></label><label><input type="checkbox" data-rule="sos" data-type="action" value="Log Only"> Log Only</label></div></div></div>
     </div>
 
     <!-- AUTHORIZATION -->
@@ -785,9 +785,13 @@ function closeModal(){document.getElementById('configModal').classList.remove('o
 // ─── HELPER: get checked values ───
 function getChecked(rule,type){
   const boxes=document.querySelectorAll(`input[data-rule="${rule}"][data-type="${type}"]:checked`);
-  return Array.from(boxes).map(b=>b.value).join(', ')||'None';
+  return Array.from(boxes).map(b=>formatSelectedValue(b.value)).join(', ')||'None';
 }
 function getRadio(name){const r=document.querySelector(`input[name="${name}"]:checked`);return r?r.value:''}
+function getCurrentCameraModel(){return getRadio('camera_model')}
+function formatSelectedValue(value){
+  return getCurrentCameraModel()==='Surfsight'&&value==='Text-to-Speech'?'Driver Alert':value;
+}
 
 // ─── PDF GENERATION ───
 function generatePDF(){
@@ -880,7 +884,9 @@ function generatePDF(){
   fieldRow('Driver Facing',document.getElementById('f_driver').checked?'Enabled':'Disabled');
   fieldRow('Audio Recording',document.getElementById('f_audio').checked?'Enabled':'Disabled');
   fieldRow('Shutdown Delay',getRadio('shutdown'));
-  fieldRow('AI Coaching Only',document.getElementById('f_ai_only').checked?'Yes':'No');
+  if(getCurrentCameraModel()==='Surfsight'){
+    fieldRow('AI Coaching Only',document.getElementById('f_ai_only').checked?'Yes':'No');
+  }
   // Auxiliary cameras
   if(document.getElementById('f_aux').checked){
     fieldRow('Auxiliary Cameras','Yes');
@@ -907,7 +913,7 @@ function generatePDF(){
   fieldRow('Email Alerts',document.getElementById('f_notif_email').checked?'Yes':'No');
   fieldRow('SMS Alerts',document.getElementById('f_notif_sms').checked?'Yes':'No');
   fieldRow('Audible Beep',document.getElementById('f_notif_beep').checked?'Yes':'No');
-  fieldRow('Text-to-Speech',document.getElementById('f_notif_tts').checked?'Yes':'No');
+  fieldRow(getCurrentCameraModel()==='Surfsight'?'Driver Alert':'Text-to-Speech',document.getElementById('f_notif_tts').checked?'Yes':'No');
   fieldRow('Recipients',document.getElementById('f_notif_recip').value);
   y+=3;
 
@@ -923,7 +929,8 @@ function generatePDF(){
   if(document.getElementById('f_hard_turns').checked) ruleRow('Hard Turns',getChecked('turns','capture'),getChecked('turns','action'));
   if(document.getElementById('f_hard_accel').checked) ruleRow('Hard Acceleration',getChecked('accel','capture'),getChecked('accel','action'));
   if(document.getElementById('f_rolling').checked) ruleRow('Rolling Stop',getChecked('rolling','capture'),getChecked('rolling','action'));
-  if(!document.getElementById('f_hard_turns').checked&&!document.getElementById('f_hard_accel').checked&&!document.getElementById('f_rolling').checked){
+  if(document.getElementById('f_idling')&&document.getElementById('f_idling').checked) ruleRow('Idling',getChecked('idling','capture'),getChecked('idling','action'));
+  if(!document.getElementById('f_hard_turns').checked&&!document.getElementById('f_hard_accel').checked&&!document.getElementById('f_rolling').checked&&!(document.getElementById('f_idling')&&document.getElementById('f_idling').checked)){
     doc.setFontSize(7.5);doc.setTextColor(140);doc.text('No optional rules selected.',M,y);y+=5.5;
   }
   y+=3;
@@ -965,9 +972,74 @@ const geotabOptions=document.getElementById('geotabOptions');
 const configWorkflow=document.getElementById('configWorkflow');
 const configFooter=document.getElementById('configFooter');
 const workflowHint=document.getElementById('workflowHint');
+const cameraSpecificBlocks=document.querySelectorAll('.camera-specific');
+const voiceOptionTexts=document.querySelectorAll('.voice-option-text');
+const voiceBadges=document.querySelectorAll('[data-voice-badge]');
+const notifVoiceText=document.getElementById('notifVoiceText');
+const notifVoiceTip=document.getElementById('notifVoiceTip');
+const voiceActionTip=document.getElementById('voiceActionTip');
+const rollingStopTip=document.getElementById('rollingStopTip');
 
 function resetCameraSelections(){
   cameraModelInputs.forEach(input=>{input.checked=false;});
+}
+
+function resetCameraSpecificInputs(hiddenBlock){
+  hiddenBlock.querySelectorAll('input').forEach(input=>{
+    if(input.type==='checkbox'||input.type==='radio') input.checked=false;
+  });
+}
+
+function updateCameraSpecificContent(cameraModel){
+  const isSurfsight=cameraModel==='Surfsight';
+  const isZenCamModel=cameraModel==='ZenCam Model';
+  const isGoFocusPlus=cameraModel==='GO Focus Plus';
+
+  cameraSpecificBlocks.forEach(block=>{
+    const cameras=(block.dataset.cameras||'').split(',').map(v=>v.trim()).filter(Boolean);
+    const show=cameras.includes(cameraModel);
+    block.style.display=show?'block':'none';
+    if(!show) resetCameraSpecificInputs(block);
+  });
+
+  voiceOptionTexts.forEach(node=>{node.textContent=isSurfsight?'Driver Alert':'TTS';});
+  voiceBadges.forEach(node=>{
+    const base=node.dataset.voiceBadge||'';
+    node.textContent='Rec: '+(isSurfsight?base.replace(/Text-to-Speech/g,'Driver Alert'):base);
+  });
+
+  notifVoiceText.textContent=isSurfsight?'Real-Time Audible Driver Alerts':'Real-Time Audible Text-to-Speech Alerts (talks to driver)';
+  notifVoiceTip.setAttribute('data-tip',isSurfsight
+    ? 'A driver alert plays through the camera speaker the moment a rule triggers, warning the driver immediately.'
+    : "An automated voice message plays through the camera speaker the moment a rule triggers, verbally coaching the driver on what was detected. For example: 'Phone use detected, please keep your eyes on the road.' Multiple actions can be selected per rule.");
+  if(voiceActionTip){
+    voiceActionTip.setAttribute('data-tip',isSurfsight
+      ? 'Email/SMS: sends alert to contacts. Driver Alert: an in-cab audible alert warns the driver immediately. Log Only: silent record. Multiple can be selected.'
+      : 'Email/SMS: sends alert to contacts. Text-to-Speech: automated voice coaches the driver out loud. Log Only: silent record. Multiple can be selected.');
+  }
+
+  if(rollingStopTip){
+    if(isZenCamModel){
+      rollingStopTip.textContent='(Requires ZenCam Plus Model Camera)';
+      rollingStopTip.style.display='inline';
+    }else if(isGoFocusPlus){
+      rollingStopTip.textContent='';
+      rollingStopTip.style.display='none';
+    }else{
+      rollingStopTip.textContent='(Requires ZenCam Plus Model Camera)';
+      rollingStopTip.style.display='inline';
+    }
+  }
+
+  if(!isZenCamModel&&!isGoFocusPlus&&document.getElementById('f_idling')){
+    document.getElementById('f_idling').checked=false;
+  }
+  if(!isZenCamModel&&!isGoFocusPlus&&document.getElementById('f_rolling')){
+    document.getElementById('f_rolling').checked=false;
+  }
+  if((isZenCamModel||isGoFocusPlus)&&document.getElementById('f_ai_only')){
+    document.getElementById('f_ai_only').checked=false;
+  }
 }
 
 function updateConfigurationFlow(){
@@ -987,6 +1059,7 @@ function updateConfigurationFlow(){
   const showWorkflow=Boolean(systemType&&cameraModel);
   configWorkflow.style.display=showWorkflow?'block':'none';
   configFooter.style.display=showWorkflow?'flex':'none';
+  updateCameraSpecificContent(cameraModel);
   workflowHint.textContent=showWorkflow
     ? systemType+' / '+cameraModel+' selected. Continue below to configure the rest of the system.'
     : systemType
