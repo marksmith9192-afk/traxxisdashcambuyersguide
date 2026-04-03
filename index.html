@@ -183,6 +183,20 @@
   .form-group label{font-size:.75rem;font-weight:600;color:var(--g600);display:flex;align-items:center;gap:5px}
   .form-group input,.form-group select{border:1px solid var(--g200);border-radius:7px;padding:9px 12px;font-size:.88rem;font-family:var(--font-body);color:var(--g800);transition:border-color .2s;background:var(--white)}
   .form-group input:focus,.form-group select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-glow)}
+  .selection-tree{background:var(--g50);border:1px solid var(--g100);border-radius:12px;padding:18px 18px 16px}
+  .selection-tree .group-label{font-size:.75rem;font-weight:700;color:var(--g600);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+  .selection-tree .choice-list{display:flex;flex-direction:column;gap:10px}
+  .selection-tree .choice-list.inline{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .selection-card{background:var(--white);border:1px solid var(--g100);border-radius:10px;padding:12px 14px;display:flex;align-items:flex-start;gap:8px;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+  .selection-card:hover{border-color:var(--teal);box-shadow:0 4px 14px rgba(0,174,239,0.08)}
+  .selection-card input{margin-top:3px;accent-color:var(--teal)}
+  .selection-card strong{display:block;font-size:.88rem;color:var(--navy)}
+  .selection-card span{display:block;font-size:.78rem;color:var(--g600);line-height:1.45}
+  .selection-branch{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--g100)}
+  .selection-branch.active{display:block}
+  .workflow-gate{display:none}
+  .workflow-hint{font-size:.8rem;color:var(--g400);margin-top:12px}
+  @media(max-width:600px){.selection-tree .choice-list.inline{grid-template-columns:1fr}}
 
   /* ─── TOOLTIP ─── */
   .info-tip{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--teal);color:var(--white);font-size:.6rem;font-weight:800;cursor:help;position:relative;flex-shrink:0}
@@ -555,6 +569,54 @@
       </div>
     </div>
 
+    <div class="form-section">
+      <div class="form-section-title"><span class="accent-bar"></span>System Type &amp; Camera Model</div>
+      <div class="selection-tree">
+        <div class="group-label">Choose the camera system you are deploying</div>
+        <div class="choice-list inline">
+          <label class="selection-card">
+            <input type="radio" name="system_type" value="ZenCam">
+            <span><strong>ZenCam</strong><span>Use this flow for Surfsight and ZenCam model cameras.</span></span>
+          </label>
+          <label class="selection-card">
+            <input type="radio" name="system_type" value="Geotab">
+            <span><strong>Geotab</strong><span>Use this flow for GO Focus and GO Focus Plus cameras.</span></span>
+          </label>
+        </div>
+
+        <div id="zenCamOptions" class="selection-branch">
+          <div class="group-label">ZenCam camera selection</div>
+          <div class="choice-list">
+            <label class="selection-card">
+              <input type="radio" name="camera_model" value="Surfsight">
+              <span><strong>Surfsight</strong><span>Standard ZenCam workflow.</span></span>
+            </label>
+            <label class="selection-card">
+              <input type="radio" name="camera_model" value="ZenCam Model">
+              <span><strong>ZenCam Model Cameras</strong><span>Use this option for ZenCam branded camera models.</span></span>
+            </label>
+          </div>
+        </div>
+
+        <div id="geotabOptions" class="selection-branch">
+          <div class="group-label">Geotab camera selection</div>
+          <div class="choice-list">
+            <label class="selection-card">
+              <input type="radio" name="camera_model" value="GO Focus">
+              <span><strong>GO Focus</strong><span>Standard Geotab camera workflow.</span></span>
+            </label>
+            <label class="selection-card">
+              <input type="radio" name="camera_model" value="GO Focus Plus">
+              <span><strong>GO Focus Plus</strong><span>Enhanced Geotab camera workflow.</span></span>
+            </label>
+          </div>
+        </div>
+
+        <p id="workflowHint" class="workflow-hint">Select a system type, then choose a camera model to continue to the configuration workflow.</p>
+      </div>
+    </div>
+
+    <div id="configWorkflow" class="workflow-gate">
     <!-- CAMERA CONFIG -->
     <div class="form-section">
       <div class="form-section-title"><span class="accent-bar"></span>Camera Configuration</div>
@@ -677,10 +739,11 @@
         <div class="form-group"><label>Date</label><input type="date" id="f_auth_date"></div>
       </div>
     </div>
+    </div>
 
   </div><!-- end modal-body -->
 
-  <div class="modal-footer">
+  <div class="modal-footer workflow-gate" id="configFooter">
     <button class="btn-generate" onclick="generatePDF()">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
       Generate Configuration Approval PDF
@@ -807,6 +870,11 @@ function generatePDF(){
   fieldRow('Type',getRadio('install_type'));
   y+=3;
 
+  sectionTitle('SYSTEM SELECTION');
+  fieldRow('System Type',getRadio('system_type'));
+  fieldRow('Camera Model',getRadio('camera_model'));
+  y+=3;
+
   sectionTitle('CAMERA CONFIGURATION');
   fieldRow('Road Facing',document.getElementById('f_road').checked?'Enabled':'Disabled');
   fieldRow('Driver Facing',document.getElementById('f_driver').checked?'Enabled':'Disabled');
@@ -889,6 +957,55 @@ function sendForSignature(){
 
 // Set today's date as default
 document.getElementById('f_auth_date').valueAsDate=new Date();
+
+const systemTypeInputs=document.querySelectorAll('input[name="system_type"]');
+const cameraModelInputs=document.querySelectorAll('input[name="camera_model"]');
+const zenCamOptions=document.getElementById('zenCamOptions');
+const geotabOptions=document.getElementById('geotabOptions');
+const configWorkflow=document.getElementById('configWorkflow');
+const configFooter=document.getElementById('configFooter');
+const workflowHint=document.getElementById('workflowHint');
+
+function resetCameraSelections(){
+  cameraModelInputs.forEach(input=>{input.checked=false;});
+}
+
+function updateConfigurationFlow(){
+  const systemType=getRadio('system_type');
+  const cameraModel=getRadio('camera_model');
+
+  zenCamOptions.classList.toggle('active',systemType==='ZenCam');
+  geotabOptions.classList.toggle('active',systemType==='Geotab');
+
+  if(systemType==='ZenCam'){
+    geotabOptions.querySelectorAll('input').forEach(input=>{input.checked=false;});
+  }
+  if(systemType==='Geotab'){
+    zenCamOptions.querySelectorAll('input').forEach(input=>{input.checked=false;});
+  }
+
+  const showWorkflow=Boolean(systemType&&cameraModel);
+  configWorkflow.style.display=showWorkflow?'block':'none';
+  configFooter.style.display=showWorkflow?'flex':'none';
+  workflowHint.textContent=showWorkflow
+    ? systemType+' / '+cameraModel+' selected. Continue below to configure the rest of the system.'
+    : systemType
+      ? 'Choose a camera model to continue to the configuration workflow.'
+      : 'Select a system type, then choose a camera model to continue to the configuration workflow.';
+}
+
+systemTypeInputs.forEach(input=>{
+  input.addEventListener('change',()=>{
+    resetCameraSelections();
+    updateConfigurationFlow();
+  });
+});
+
+cameraModelInputs.forEach(input=>{
+  input.addEventListener('change',updateConfigurationFlow);
+});
+
+updateConfigurationFlow();
 
 // Auxiliary camera toggle
 document.getElementById('f_aux').addEventListener('change',function(){
